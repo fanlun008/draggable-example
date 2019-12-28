@@ -9,6 +9,8 @@
           <label><input type="checkbox" v-model="editable">Enable drag and drop</label>
         </div>
         <button type="button" class="btn btn-default" @click="orderList">Sort by original order</button>
+        <button type="button" class="btn btn-default" @click="toDemo">To MyDraggable Demo</button>
+        <button type="button" class="btn btn-default" @click="toCH2">To CH2</button>
       </div>
     </div>
 
@@ -42,6 +44,8 @@
     <div class="list-group col-md-3">
       <pre>{{list2String}}</pre>
     </div>
+
+    <router-view></router-view>
   </div>
 </template>
 
@@ -86,6 +90,15 @@ export default {
       return (
         (!relatedElement || !relatedElement.fixed) && !draggedElement.fixed
       );
+    },
+    toDemo() {
+      console.log("h")
+      this.$router.push({name: 'dragDemo'}, function () {
+        console.log('导航成功')
+      })
+    },
+    toCH2() {
+      this.$router.push({path: '/hello/ch2'})
     }
   },
   computed: {
