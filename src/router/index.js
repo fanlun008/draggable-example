@@ -7,12 +7,13 @@ import Hello from '@/components/Hello'
 import DraggableDemo from 'components/DraggableDemo'
 import Ch1 from 'components/ch1'
 import Ch2 from 'components/Ch2'
+import { createToken } from "@/api/common";
 
-export default new Router({
+const VueRouter =  new Router({
   routes: [
     {
       path: '/',
-      redirect: 'hello'
+      redirect: '/ch1-flex'
     },
     {
       name: 'hello',
@@ -39,6 +40,25 @@ export default new Router({
       name: 'dragDemo',
       path: '/dragDemo',
       component: DraggableDemo
+    },
+    {
+      name: 'ch1-flex',
+      path: '/ch1-flex',
+      component: Ch1
     }
   ]
 })
+
+VueRouter.beforeEach((to, from, next) => {
+  if (to.path === '/ch1-flex') {
+    console.log('router...before.../ch1-flex...')
+    createToken({'user': 'fanlun'}).then(res => {
+      console.log(res, 'response')
+      localStorage.setItem('token', res.data.token);
+    })
+  }
+  next()
+})
+
+
+export default VueRouter

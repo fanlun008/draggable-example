@@ -14,3 +14,11 @@ new Vue({
   router,
   render: h => h(App)
 }).$mount("#app");
+
+
+// router.beforeEach((to, from, next) => {
+//   if (to.path === '/ch1-flex') {
+//     console.log('router...before...')
+//     next({ path: '/dragDemo' })
+//   }
+// })

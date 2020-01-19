@@ -98,7 +98,8 @@ export default {
       })
     },
     toCH2() {
-      this.$router.push({path: '/hello/ch2'})
+      // this.$router.push({path: '/hello/ch2'})
+      this.$router.push({path: '/ch1-flex'})
     }
   },
   computed: {
