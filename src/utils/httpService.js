@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const instance = axios.create({    //创建axios实例，在这里可以设置请求的默认配置
   timeout: 10000, // 设置超时时间10s
-  baseURL: 'http://localhost:9090'
+  baseURL: process.env.VUE_APP_BASE_API
 })
 
 instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'

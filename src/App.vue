@@ -25,6 +25,9 @@
     name: "app",
     components: {
       Hello
+    },
+    created() {
+      console.log('create', process.env.VUE_APP_TITLE)
     }
   };
 </script>

@@ -6,8 +6,10 @@
   "author": "desmaisons_david <desmaisons_david@hotmail.com>",
   "license": "MIT",
   "scripts": {
+    "dev": "vue-cli-service serve --mode development",
+    "prod": "vue-cli-service serve --mode production",
     "serve": "vue-cli-service serve --open",
-    "build": "vue-cli-service build --dest docs --mode dev --modern",
+    "build:dev": "vue-cli-service build --dest docs --mode dev --modern",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit"
   },
