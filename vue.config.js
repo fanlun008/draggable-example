@@ -1,19 +1,17 @@
 
 'use strict'
-const path = require('path')
-
+const path = require('path');
+function resolve(dir) {
+  return path.join(__dirname, dir)
+}
 module.exports = {
-  context: path.resolve(__dirname, './'),
-  resolve: {
-    extensions: ['.js', '.vue', '.json'],
-    alias: {
-      '@': path.resolve('src'),
-      '@assets': path.resolve(__dirname, 'src/assets'),
-      '@pages': path.resolve(__dirname, 'src/pages'),
-      '@comp': path.resolve(__dirname, 'src/components'),
-      '@api': path.resolve(__dirname, 'src/api'),
-      '@plug': path.resolve(__dirname, 'src/plugins'),
-      '@utils': path.resolve(__dirname, 'src/utils')
-    }
+  chainWebpack: (config)=>{
+    config.resolve.alias
+        .set('@', resolve('src'))
+        .set('assets',resolve('src/assets'))
+        .set('components',resolve('src/components'))
+        .set('layout',resolve('src/layout'))
+        .set('base',resolve('src/base'))
+        .set('static',resolve('src/static'))
   }
 }
