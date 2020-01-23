@@ -14,6 +14,7 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "animate.css": "^3.7.2",
     "axios": "^0.19.1",
     "bootstrap": "^3.3.7",
     "element-ui": "^2.13.0",
