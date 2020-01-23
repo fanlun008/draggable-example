@@ -27,6 +27,12 @@
     <div>
       <el-button @click="runorstop">running/stop</el-button>
     </div>
+    <div>
+      <el-button @click="runRotate">run rotate</el-button>
+    </div>
+
+
+    <i class="el-icon-refresh animated-test-roll2" ref="animated_roll_ref2"></i>
   </div>
 </template>
 
@@ -39,7 +45,8 @@
       return {
         buttonTitle: 'On',
         isShow: true,
-        transLR: 'moveL'
+        transLR: 'moveL',
+        Intervaller: {}
       }
     },
     methods: {
@@ -48,6 +55,21 @@
           console.log(res, 'response')
         })
       },
+
+      runRotate() {
+
+        let iconItem = this.$refs.animated_roll_ref2
+        iconItem.style['-webkit-animation-play-state'] = 'running'
+        setTimeout(() => {
+          iconItem.style['-webkit-animation-play-state'] = 'paused'
+        }, 1000)
+      },
+
+      stopRotateWhenCreated() {
+        let iconItem = this.$refs.animated_roll_ref2
+        iconItem.style['-webkit-animation-play-state'] = 'paused'
+      },
+
 
       runorstop() {
         let divItem = this.$refs.animated_roll_ref
@@ -62,7 +84,7 @@
       switchStatus() {
         this.transLR = 'moveL'
         this.isShow = !this.isShow
-        setTimeout(()=>{
+        setTimeout(()=> {
           this.buttonTitle = 'OFF'
           this.transLR = 'moveR'
           this.isShow = !this.isShow
@@ -75,6 +97,10 @@
         this.transLR = 'moveL'
         this.buttonTitle = 'On'
       }
+    },
+
+    mounted() {
+      this.stopRotateWhenCreated()
     }
   }
 </script>
@@ -128,12 +154,16 @@
     }*/
   }
 
+  .animated-test-roll2 {
+    -webkit-animation:run 1s linear 0s infinite;
+  }
+
   @-webkit-keyframes run{
     from{
       -webkit-transform:rotate(0deg);
     }
     to{
-      -webkit-transform:rotate(360deg);
+      -webkit-transform:rotate(-360deg);
     }
   }
 }
