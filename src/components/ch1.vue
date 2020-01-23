@@ -13,6 +13,20 @@
     <div>
       <el-button @click="clickToken">clickToken</el-button>
     </div>
+
+    <div class="use-animated-test">
+
+      <div class="box animated rollOut infinite">
+        <span>9090</span>
+      </div>
+    </div>
+    <br/><br/><br/>
+
+    <i class="el-icon-refresh animated-test-roll" ref="animated_roll_ref"></i>
+
+    <div>
+      <el-button @click="runorstop">running/stop</el-button>
+    </div>
   </div>
 </template>
 
@@ -33,6 +47,16 @@
         createToken({'user': 'fanlun'}).then(res => {
           console.log(res, 'response')
         })
+      },
+
+      runorstop() {
+        let divItem = this.$refs.animated_roll_ref
+        console.log('runorstop...', divItem)
+        if (divItem.style['-webkit-animation-play-state'] === 'paused') {
+          divItem.style['-webkit-animation-play-state'] = 'running'
+        } else {
+          divItem.style['-webkit-animation-play-state'] = 'paused'
+        }
       },
 
       switchStatus() {
@@ -85,6 +109,32 @@
   .moveL-leave-to {
     transform: translateX(-100%);
     opacity: 0;
+  }
+
+  .use-animated-test {
+    width: 200px
+    height 100px
+    border: 1px solid red
+    display flex
+    justify-content center
+    align-items center
+  }
+
+  .animated-test-roll {
+    -webkit-animation:run 3s linear 0s infinite;
+
+    /*&:hover {
+      -webkit-animation-play-state:paused;
+    }*/
+  }
+
+  @-webkit-keyframes run{
+    from{
+      -webkit-transform:rotate(0deg);
+    }
+    to{
+      -webkit-transform:rotate(360deg);
+    }
   }
 }
 </style>

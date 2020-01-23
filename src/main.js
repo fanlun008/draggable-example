@@ -6,6 +6,9 @@ import "font-awesome/less/font-awesome.less";
 import router from './router'
 import 'element-ui/lib/theme-chalk/index.css';
 
+import animated from 'animate.css' // npm install animate.css --save安装，在引入
+
+Vue.use(animated)
 
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
