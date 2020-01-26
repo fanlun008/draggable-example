@@ -7,7 +7,9 @@ import Hello from '@/components/Hello'
 import DraggableDemo from 'components/DraggableDemo'
 import Ch1 from 'components/ch1'
 import Ch2 from 'components/Ch2'
-import { createToken } from "@/api/common";
+import { createToken, validateToken } from "@/api/common";
+import Cookies from 'js-cookie'
+
 
 const VueRouter =  new Router({
   routes: [
@@ -49,13 +51,27 @@ const VueRouter =  new Router({
   ]
 })
 
-VueRouter.beforeEach((to, from, next) => {
+VueRouter.beforeEach(async (to, from, next) => {
   if (to.path === '/ch1-flex') {
     console.log('router...before.../ch1-flex...')
-    createToken({'user': 'fanlun'}).then(res => {
+    /*createToken({'user': 'fanlun'}).then(res => {
       console.log(res, 'response')
       localStorage.setItem('token', res.data.token);
-    })
+    })*/
+    if (Cookies.get("token")) {
+      console.log("get token from Cookie...", Cookies.get("token"))
+      await validateToken({'token': Cookies.get("token")}).then(res => {
+        console.log('validation token, result...', res)
+        if (res.data.message.indexOf("expired") > 0) {
+          next({'path': '/dragDemo'})
+        }
+      }).catch(err => {
+        console.log('error...', err)
+      })
+      next()
+    } else {
+      next({'path': '/dragDemo'})
+    }
   }
   next()
 })

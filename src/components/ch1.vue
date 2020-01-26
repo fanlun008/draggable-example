@@ -1,38 +1,41 @@
 <template>
   <div class="container">
-    <h3>CH1</h3>
 
-    <el-button @click="switchStatus">switch</el-button>
-    <el-button @click="resetStatus">reset</el-button>
-    <transition :name="transLR" mode="out-in">
-      <div class="lef" v-if="isShow">
-        {{ buttonTitle }}
+    <div class="left-container">
+      <h3>CH1-left</h3>
+      <el-button @click="switchStatus">switch</el-button>
+      <el-button @click="resetStatus">reset</el-button>
+      <transition :name="transLR" mode="out-in">
+        <div class="lef" v-if="isShow">
+          {{ buttonTitle }}
+        </div>
+      </transition>
+
+      <div class="use-animated-test">
+
+        <div class="box animated rollOut infinite">
+          <span>9090</span>
+        </div>
       </div>
-    </transition>
+      <br/><br/><br/>
 
-    <div>
-      <el-button @click="clickToken">clickToken</el-button>
-    </div>
+      <i class="el-icon-refresh animated-test-roll" ref="animated_roll_ref"></i>
 
-    <div class="use-animated-test">
-
-      <div class="box animated rollOut infinite">
-        <span>9090</span>
+      <div>
+        <el-button @click="runorstop">running/stop</el-button>
       </div>
+      <div>
+        <el-button @click="runRotate">run rotate</el-button>
+      </div>
+
+
+      <i @click="runRotate" class="el-icon-refresh animated-test-roll2" ref="animated_roll_ref2"></i>
     </div>
-    <br/><br/><br/>
+    <div class="right-container">
+      <h2>CH1-right</h2>
 
-    <i class="el-icon-refresh animated-test-roll" ref="animated_roll_ref"></i>
-
-    <div>
-      <el-button @click="runorstop">running/stop</el-button>
-    </div>
-    <div>
-      <el-button @click="runRotate">run rotate</el-button>
     </div>
 
-
-    <i class="el-icon-refresh animated-test-roll2" ref="animated_roll_ref2"></i>
   </div>
 </template>
 
@@ -50,12 +53,6 @@
       }
     },
     methods: {
-      clickToken() {
-        createToken({'user': 'fanlun'}).then(res => {
-          console.log(res, 'response')
-        })
-      },
-
       runRotate() {
 
         let iconItem = this.$refs.animated_roll_ref2
@@ -108,63 +105,75 @@
 <style scoped lang="stylus">
 .container {
   width 90%
-  .lef {
-    width 60px;
-    height 30px;
-    border 1px solid rebeccapurple
-  }
-  .moveR-enter-active,  .moveR-leave-active {
-    transition: all 1s linear;
-    transform: translateX(0);
-  }
-  .moveR-enter,  .moveR-leave {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  .moveR-leave-to{
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  .moveL-enter-active, .moveL-leave-active {
-    transition: all 1s linear;
-    transform: translateX(0%);
-  }
-  .moveL-enter, .moveL-leave {
-    transform: translateX(-100%);
-  }
-  .moveL-leave-to {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-
-  .use-animated-test {
-    width: 200px
-    height 100px
-    border: 1px solid red
-    display flex
-    justify-content center
-    align-items center
-  }
-
-  .animated-test-roll {
-    -webkit-animation:run 3s linear 0s infinite;
-
-    /*&:hover {
-      -webkit-animation-play-state:paused;
-    }*/
-  }
-
-  .animated-test-roll2 {
-    -webkit-animation:run 1s linear 0s infinite;
-  }
-
-  @-webkit-keyframes run{
-    from{
-      -webkit-transform:rotate(0deg);
+  display flex
+  flex-direction row
+  justify-content space-around
+  .left-container {
+    .lef {
+      width 60px;
+      height 30px;
+      border 1px solid rebeccapurple
     }
-    to{
-      -webkit-transform:rotate(-360deg);
+    .moveR-enter-active,  .moveR-leave-active {
+      transition: all 1s linear;
+      transform: translateX(0);
+    }
+    .moveR-enter,  .moveR-leave {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    .moveR-leave-to{
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    .moveL-enter-active, .moveL-leave-active {
+      transition: all 1s linear;
+      transform: translateX(0%);
+    }
+    .moveL-enter, .moveL-leave {
+      transform: translateX(-100%);
+    }
+    .moveL-leave-to {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+
+    .use-animated-test {
+      width: 200px
+      height 100px
+      border: 1px solid red
+      display flex
+      justify-content center
+      align-items center
+    }
+
+    .animated-test-roll {
+      -webkit-animation:run 3s linear 0s infinite;
+
+      /*&:hover {
+        -webkit-animation-play-state:paused;
+      }*/
+    }
+
+    .animated-test-roll2 {
+      cursor pointer
+      -webkit-animation:run 1s linear 0s infinite
+
+      &:hover {
+        color red
+        font-size: 16px
+      }
+    }
+
+    @-webkit-keyframes run{
+      from{
+        -webkit-transform:rotate(0deg);
+      }
+      to{
+        -webkit-transform:rotate(-360deg);
+      }
     }
   }
+
 }
 </style>
