@@ -33,7 +33,9 @@
     </div>
     <div class="right-container">
       <h2>CH1-right</h2>
-
+      <transition>
+        <div class="box-change-size" @click="changeBoxSize"></div>
+      </transition>
     </div>
 
   </div>
@@ -53,6 +55,10 @@
       }
     },
     methods: {
+      changeBoxSize() {
+        this.$message.success('change...')
+      },
+
       runRotate() {
 
         let iconItem = this.$refs.animated_roll_ref2
@@ -108,6 +114,18 @@
   display flex
   flex-direction row
   justify-content space-around
+  .right-container {
+    .box-change-size {
+      width 200px
+      height: 200px
+      background-color red
+      transition: all 0.6s
+      &:hover {
+        transform: rotate(-180deg) scale(1.4)
+      }
+    }
+
+  }
   .left-container {
     .lef {
       width 60px;
